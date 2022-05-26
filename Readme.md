@@ -10,13 +10,19 @@ The code published here is not intended as a stand-alone package. It can be used
 Should you have any questions or spot a bug in the code, please send an email to marcus.buckmann@bankofengland.co.uk or raise an issue within the repository.
 
 
-The code has been developed under Python 3.9.7 Anaconda distribution. The file requirements/requirements.txt specifies the Anaconda environment in which the experiments were run.
+The code has been developed under Python 3.9.7 Anaconda distribution. The file requirements/requirements.txt specifies the Anaconda environment in which the experiments were run. 
 
 
 
 # Structure of the code
 
-We use ```Python``` to train and test the machine learning models and compute the measures of variable importance and use ```R``` to produce the Figures and Tables presented in the paper.
+We use ```Python``` to train and test the machine learning models and compute the measures of variable importance and use ```R``` to produce the Figures and Tables presented in the paper. Below, provide a hgh level description how to run the experiments and analyse the results. The ```scr``` folder contains the necessariy helper 
+functions in the scripts. 
+
+- ```utils.py``` contains general helper functions, e.g. reading and wirting data, or normalising and trasforming variables
+- ```utils_predict``` contains functions used to train and test the prediction models, e.g. it specifies the hyperparameter grids of the machine learning models
+- ```utils_importance``` contains the functions to estimate variable importance
+- ```import_packages``` imports the packages used 
 
 ## Modelling
 
