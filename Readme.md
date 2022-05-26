@@ -16,12 +16,14 @@ The code has been developed under Python 3.9.7 Anaconda distribution. The file r
 
 # Structure of the code
 
-We use ```Python``` to train and test the machine learning models and compute the measures of variable importance and use ```R``` to produce the Figures and Tables presented in the paper. Below, provide a hgh level description how to run the experiments and analyse the results. The ```scr``` folder contains the necessariy helper 
-functions in the scripts. 
+We use ```Python``` to train and test the machine learning models and compute the measures of variable importance and use ```R``` to produce the Figures and Tables presented in the paper. Below, provide a hgh level description how to run the experiments and analyse the results. The ```scr``` folder contains helper functions and  configurations. 
 
+
+- 
 - ```utils.py``` contains general helper functions, e.g. reading and wirting data, or normalising and trasforming variables
 - ```utils_predict``` contains functions used to train and test the prediction models, e.g. it specifies the hyperparameter grids of the machine learning models
 - ```utils_importance``` contains the functions to estimate variable importance
+- ```config.py``` contains some configuration parameters that are constant across all experiments
 - ```import_packages``` imports the packages used 
 
 ## Modelling
