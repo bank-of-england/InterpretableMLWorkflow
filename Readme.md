@@ -44,7 +44,7 @@ Similarly, the scripts ```collect_importance_forecast.py``` aggregated the varia
 
 ## Shapley regression 
 
-The script ```shapley_regression.py``` reads the file containint the Shapley values of the forecasting experiments (that was compiled by ```collect_importance_forecast.py``` and computes the Shapely regression ([see Joseph, 2019](https://aps.arxiv.org/abs/1903.04209v1)). 
+The script ```shapley_regression.py``` reads the file containint the Shapley values of the forecasting experiments (that was compiled by ```collect_importance_forecast.py```) and computes the Shapley regression ([see Joseph, 2019](https://aps.arxiv.org/abs/1903.04209v1)). 
 
 
 
