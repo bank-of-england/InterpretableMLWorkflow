@@ -1,0 +1,37 @@
+bootstrap_hyper: false
+bootstrap_proportion: 1
+change_predictor: 3
+change_target: 12
+counter:
+- 0
+cv_mode: 3
+cv_repeat: 1
+error_metric: absolute_error
+features:
+- key
+gap_size_kfold_block: 12
+hyper_type:
+- kfold_block_gap
+lag: 12
+lag_response_as_predictor:
+- response
+method:
+- Ridge
+- LightGBM
+n_boot:
+- 30
+n_boot_importance:
+- 30
+n_folds: 5
+name_ID: main
+norm_var: true
+pca_max_components: 2
+permutation_rep: 250
+random_search_iterations: 100
+seed:
+- null
+step_size: 12
+target: UNRATE
+window_size: 10000
+winsorize:
+- 0.01

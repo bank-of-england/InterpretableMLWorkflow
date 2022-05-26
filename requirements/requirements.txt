@@ -1,0 +1,17 @@
+psutil==5.8.0
+lightgbm==3.1.1
+llvmlite==0.37.0
+matplotlib==3.4.2
+numpy==1.20.3
+pandas==1.3.2
+pyyaml==5.4.1
+patsy==0.5.1
+scikit-learn==0.24.2
+scipy==1.7.1
+shap==0.39.0
+tqdm==4.62.2
+tscv==0.1.2
+matplotlib==3.4.2
+statsmodels==0.12.2
+pathos==0.2.8
+monthdelta==0.9.1
