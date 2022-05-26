@@ -18,7 +18,24 @@ The code has been developed under Python 3.9.7 Anaconda distribution. The file r
 
 We use ```Python``` to train and test the machine learning models and compute the measures of variable importance and use ```R``` to produce the Figures and Tables presented in the paper.
 
-## Estimating the models
+## Modelling
+
+
+The script ```run_experiment.py``` is the main script. It reads the data, and calls the ```run_experiments``` function, which, in a loop conducts all the experiments.
+The parameters of the experiments are read from a yaml file that is created with the script ```setup_epxeriments.py```. In that script, the user can specify which prediction methods to test and can set parameters of the experimental set-up, such as the degree of winsorising, the type cross-valdiation used for hyperparameter optimisation, or the training sample size.
+
+The ```run_experiments``` function computes the predictions of the model as well as the variable importance measures (Shapely values, permutation importance).
+
+
+After running the experiments
+
+
+
+
+
+
+
+
 
 
 
