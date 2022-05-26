@@ -4,7 +4,7 @@ This reposity contains the code used in the Bank of England Staff Working Paper 
 In the paper, we propose a generic workﬂow for the use of machine learning models to inform decision making and to communicate modelling results with stakeholders. It
 involves three steps: (1) a comparative model evaluation, (2) a feature importance analysis and (3) statistical inference based on Shapley value decompositions. The paper demonstrates each step by forecasting changes in US unemployment one year ahead.
 
-The data set we use is [FRED-MD](https://research.stlouisfed.org/econ/mccracken/fred-databases/), a US data base of monthly macroeconomic measurements. We use the snapshot of (August 2021)[https://files.stlouisfed.org/files/htdocs/fred-md/monthly/2021-08.csv]. Note that the first row contains the transformations of variables (as suggested by the authors)[https://s3.amazonaws.com/real.stlouisfed.org/wp/2015/2015-012.pdf] of the paper.
+The data set we use is [FRED-MD](https://research.stlouisfed.org/econ/mccracken/fred-databases/), a US data base of monthly macroeconomic measurements. We use the snapshot of [August 2021](https://files.stlouisfed.org/files/htdocs/fred-md/monthly/2021-08.csv). Note that the first row codes the transformations of variables [as suggested by the authors](https://s3.amazonaws.com/real.stlouisfed.org/wp/2015/2015-012.pdf) of the paper.
 
 The code published here is not intended as a stand-alone package. It can be used to reproduce the results of the paper. But as the porposed workflow is quite general, parts of it may be transfered to other applications. No warranty is given. Please consult the licence file.
 
