@@ -24,22 +24,26 @@ We use ```Python``` to train and test the machine learning models and compute th
 The script ```experiment.py``` is the main script. It reads the data, and calls the ```run_experiments``` function, which, in a loop conducts all the experiments.
 The parameters of the experiments are read from a yaml file that is created with the script ```setup_epxeriments.py```. In that script, the user can specify which prediction methods to test and can set parameters of the experimental set-up, such as the degree of winsorising, the type cross-valdiation used for hyperparameter optimisation, or the training sample size. The user can either set these parameters to a single value (e.g. method =  "Forest") or to a list of several values. In the latter case, all parameter combinations will be enumerated and the ```run_experiments``` will produce results for each of the experiments.
 
-The ```run_experiments``` function computes the predictions of the model as well as the variable importance measures (Shapely values, permutation importance). For each individual experiment, output files with the preditions, and variable importance measures are saved on the hard drive in the __results__ folder. The name of these files are hash keys that are based on the parameters of the experimental setup (see ```setup_experiments.py```.
+The ```run_experiments``` function computes the predictions of the model as well as the variable importance measures (Shapely values, permutation importance). For each individual experiment, output files with the preditions, and variable importance measures are saved as __pickle__ files on the hard drive in the __results__ folder. The name of these files are hash keys that are based on the parameters of the experimental setup (see ```setup_experiments.py```.
+
+## Aggregating the results 
+
+After running the individual experiments, their results can be aggregated using the ```collect...``` scripts. 
+
+The script ```collect_performance.py``` appends the prediction reuslts of the individual experiments and save them in a __.csv__ in the folder __results/aggregated__.
+Similarly, the scripts ```collect_importance_forecast.py``` aggregated the variable importance results into a single __.csv__ file for the Shapely vlaues and permutation importance measures in the forecasting experiments. In the paper we also estimate Shaeply values using the out-of-bag apporach. This means, we train the models on a bootstrapped sample of the data and estimate the Shapley vlaueson those observatios not in the boostrapped sample (i.e. the out-of-bag observations). The script ```collect_importance_out_of_bag.py``` collects these results.
+
+
+## Shapley regression 
 
 
 
 
+## Analysing the results
 
+The script ```error_analysis.R``` reads the aggregated prediction results copmutes the prediction errors and plots the time series.
 
-
-
-
-
-
-
-
-
-
+The script ```shapley_analysis``` reads the aggregated Shapley vlaues permutation importance values and produces the main variable improtance figures shown in the paper.
 
 
 
