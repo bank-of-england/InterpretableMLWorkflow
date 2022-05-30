@@ -11,7 +11,7 @@ The code published here is not intended as a stand-alone package. It can be used
 Should you have any questions or spot a bug in the code, please send an email to marcus.buckmann@bankofengland.co.uk or raise an issue within the repository.
 
 
-The file requirements/requirements.txt specifies the Python packages we used. We ran the experiments on a Windows 10 computer and set up the Python environment with the following commands:
+The file _requirements/requirements.txt_ specifies the Python packages we used. We ran the experiments on a Windows 10 computer and set up the Python environment with the following commands:
 ```
 conda create -n workflow python=3.9.7
 activate workflow
