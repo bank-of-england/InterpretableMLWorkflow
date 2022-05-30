@@ -45,13 +45,13 @@ The ```run_experiments``` function computes the predictions of the model as well
 
 After running the individual experiments, their results can be aggregated using the ```collect...``` scripts. 
 
-The script ```collect_performance.py``` appends the prediction results of the individual experiments and saves them in a _.csv_ in the folder ```results/aggregated```.
-Similarly, the scripts ```collect_importance_forecast.py``` aggregated the variable importance results into a single _.csv_ file for the Shapley vlaues and permutation importance measures in the forecasting experiments. In the paper, we also estimate Shapley values using the out-of-bag approach. This means, we train the models on a bootstrapped sample of the data and estimate the Shapley values on those observatios not in the bootstrapped sample (i.e. the out-of-bag observations). The script ```collect_importance_out_of_bag.py``` collects these results.
+The script ```collect_performance.py``` appends the forecasting results of the individual experiments and saves them to a _.csv_ file in the folder ```results/aggregated```.
+Similarly, the scripts ```collect_importance_forecast.py``` aggregated the variable importance results of the forecasting experiments into a _.csv_. In the paper, we also estimate Shapley values using the out-of-bag approach. This means, we train the models on a bootstrapped sample of the data and estimate the Shapley values on those observatios not in the bootstrapped sample (i.e. the out-of-bag observations). The script ```collect_importance_out_of_bag.py``` collects these results.
 
 
 ## Shapley regression 
 
-The script ```shapley_regression.py``` reads the file containing the Shapley values of the forecasting experiments (that was compiled by ```collect_importance_forecast.py```) and computes the Shapley regression ([see Joseph, 2019](https://aps.arxiv.org/abs/1903.04209v1)). 
+The script ```shapley_regression.py``` reads the file containing the Shapley values of the forecasting experiments (that was compiled by ```collect_importance_forecast.py```) and conducts statistical inference  on the Shapely values using the _Shapley regression_ method ([see Joseph, 2019](https://aps.arxiv.org/abs/1903.04209v1)). 
 
 
 
