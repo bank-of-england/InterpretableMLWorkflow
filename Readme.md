@@ -24,7 +24,7 @@ pip install -r requirements.txt
 
 # Structure of the code
 
-We use ```Python``` to train and test the machine learning models and compute the measures of variable importance and use ```R``` to produce the figures and tables presented in the paper. Below, we provide a high level description of how to run the experiments and analyse the results. The ```helpers``` folder contains helper functions and  configurations. 
+We use ```Python``` to train and test the machine learning models and compute the measures of variable importance and use ```R``` to produce the figures and tables presented in the paper. The ```helpers``` folder contains helper functions and  configurations:
 
  
 - ```utils.py``` contains general helper functions, e.g. reading and writing data, or normalising and transforming variables
@@ -35,7 +35,6 @@ We use ```Python``` to train and test the machine learning models and compute th
 - ```import_packages``` imports all Python packages used.
 
 ## Modelling
-
 
 The script ```experiment.py``` is the main script. It reads the data and calls the ```run_experiments``` function, which, in a loop conducts all the experiments.
 The parameters of the experiments are read from a yaml file (in folder ```setup_files```) that is created with the script ```setup_epxeriments.py```. In that script, the user can specify which prediction methods to test and can set parameters of the experimental set-up, such as the degree of winsorising, the type cross-validation used for hyperparameter optimisation, or the training sample size. The user can either set these parameters to a single value (e.g. method =  "Forest") or to a list of several values. In the latter case, all parameter combinations will be enumerated and the ```run_experiments``` will produce results for each of the experiments.
