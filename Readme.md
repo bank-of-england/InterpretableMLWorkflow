@@ -57,7 +57,7 @@ The script ```shapley_regression.py``` reads the file containing the Shapley val
 
 ## Analysing the results
 
-The script ```error_analysis.R``` reads the aggregated prediction results and computes the prediction errors and plots time series charts.
+The script ```error_analysis.R``` reads the aggregated prediction results, computes the prediction errors, and plots time series of the observed and predicted response.
 
 The script ```shapley_analysis``` reads the aggregated Shapley values and permutation importance values and produces the main variable importance figures shown in the paper.
 
