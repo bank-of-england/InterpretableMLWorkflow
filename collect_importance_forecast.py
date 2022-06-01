@@ -1,6 +1,5 @@
 """
-This script collects the variable importance results of all out-of-bag experiments 
-in a single csv file.
+This script collects the variable importance results of the forecasting experiments in a csv file.
 """
 
 from helpers.import_packages import *    
@@ -58,9 +57,9 @@ for h in hashes:
         res_perm = pk.load(open(results_raw_folder + "importance_forecast_permutation_" + h + ".pickle",'rb'))
         res_perm.keys()
         out_add = pd.concat([
-                res_perm["permutation_error_abs"].T, # influcence of permutations on absolute error
-                res_perm["permutation_error"].T, # influcence of permutations on squared error
-                res_perm["permutation_abs_deviance"].T # influcence of permutations on change in prediction
+                res_perm["permutation_error_abs"].T, # influence of permutations on absolute error
+                res_perm["permutation_error"].T, # influence of permutations on squared error
+                res_perm["permutation_abs_deviance"].T # influence of permutations on change in prediction
                 ])
         out_add["type"] = ["absolute_error", "squared_error", "prediction deviance"]
         for k in exp_info.columns:

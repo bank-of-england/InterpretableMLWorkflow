@@ -1,7 +1,5 @@
 """
-This file provides some basic configuration that is
- not expected to change between different experiments
-
+This file provides specifies sone basic configuration that is not expected to change between different experiments
 """
 
 import os

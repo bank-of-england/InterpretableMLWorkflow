@@ -1,11 +1,15 @@
 
+"""
+This script contains helper functions to compute the variable importance
+"""
+
 from __main__ import *
 import platform
 
 """
 This function estimates Shapley values based on the SHAP package
 :param model: sklearn prediction model
-:param exp: dict contianing experimental parameters
+:param exp: dict containing experimental parameters
 :param trainx: pd.DataFrame containing the features of the training set
 :param testx: pd.DataFrame containing the features of the test set
 :param boot_train_ix: index of the training observations that appeared in a bootstrapped sample. 
@@ -14,7 +18,7 @@ This function estimates Shapley values based on the SHAP package
     The default value is priority, which means that the TreeExplainer is used for tree models, the linear explainer for linear models
     and the kernel explainer for the other models (e.g. neural network). This can be set to kernel to use the kernel
     explainer for all model families.
-:return: Shapley vlaues of the test set
+:return: Shapley values of the test set
 """
 
 def compute_shapley(model, exp, train_x, test_x, boot_train_ix = None, explainer = "priority"):
@@ -60,7 +64,7 @@ def compute_shapley(model, exp, train_x, test_x, boot_train_ix = None, explainer
 """ This function calculates the Shapley share coefficients for Shapley regression and does the 
     statistical inference on the Shapley values
 :param data: pd.DataFrame Original input data 
-:param decomp: pd.DataFrame Shapley values decomposition
+:param decomp: pd.DataFrame Shapley values
 :param target: str name of the response variable
 :param features: names of features
 :param se_type: str type of regression standard error. Needs to be compatible with statsmodels OLS
@@ -294,8 +298,8 @@ This function computes importance measures (Shapley values and permutation impor
 :param models: list of machine learning models
 :param boot_use: int specifying how many bootstrap iterations (if model has been bootstrapped) will be used to estimate 
     Shapley values. 
-:param ix_use: string specifing the model (at a certain time t) for which we estimate Shapley values. Note that we only can investigate 
-                a model at time t for which we applied bootstrapping (see parameter boot_dates in function run_expeirments_forecast).
+:param ix_use: string specifying the model (at a certain time t) for which we estimate Shapley values. Note that we only can investigate 
+                a model at time t for which we applied bootstrapping (see parameter boot_dates in function run_experiments).
                 By default this parameter is none and the model trained at the last point in time is used to estimate the Shapley values
                 for all previous data points.
 :param method: str specifying which importance measure is computed

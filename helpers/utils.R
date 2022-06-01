@@ -2,7 +2,7 @@ library(tidyverse)
 
 
 
-figure_path <- "C:/Users/marcu/Dropbox/boe_research/macroforecasting/paper&slides/IJCB_RR/figures/"
+figure_path <- ""
 
 
 
@@ -93,7 +93,7 @@ feature_names <- c( # for convenience: ordered by mean importance
   "DPCERA3M086SBEA" = "Consumption",
   "UNRATE" = "Unemployment rate",
   "BUSLOANS" = "Business loans",
-  "TB3MS" = "3-month trasury bill",
+  "TB3MS" = "3 month treasury bill",
   "RPI" = "Real personal income",
   "OILPRICEx" =  "Oil price",
   "M2SL" = "M2 Money",
@@ -139,8 +139,6 @@ compute_metrics <- function(y, pred){
     "abs_error_sum" = sum(abs(y - pred)),
     "rmse" = sqrt(sum((y - pred)^2) / length(y)),
     "cor" = cor(y, pred),
-    "direction_acc" = mean(sign(y) == sign(pred)), 
-    "direction_acc_no0" = mean(sign(y[y!=0]) == sign(pred[y!=0])), #  # not clear how to treat non-changes... see: https://en.wikipedia.org/wiki/Mean_directional_accuracy
     "n" = length(y)
   )
   return(output)         
@@ -160,7 +158,7 @@ dm_test <- function(true, pred1, pred2, alternative = "greater"){
 }
 
 
-# plot the time series of the predcition error of different methods
+# plot the time series of the prediction error of different methods
 plot_time_series_error <- function(data, methods = c("Forest", "OLS", "AR1"), absolute_error = F){
   if(is.null(data$counter))
     data$counter <- 0
@@ -199,7 +197,7 @@ plot_time_series_error <- function(data, methods = c("Forest", "OLS", "AR1"), ab
   }
 }
 
-# plots the time series of the 
+# plots the time series of the response and predictions
 plot_time_series <- function(data, methods = c("Forest", "OLS", "AR1"), show_target = T){
   if(is.null(data$counter))
     data$counter <- 0
@@ -259,6 +257,7 @@ makeTransparent <- function(..., alpha=0.5) {
 }
 
 
+# computes the Shapley share as a measure of feature importance
 shap_importance <- function(shap_matrix){
   row_sum <- apply(abs(shap_matrix), 1, sum, na.rm = T)
   shap_mean_norm <- shap_matrix / replicate(ncol(shap_matrix), row_sum)
@@ -266,7 +265,7 @@ shap_importance <- function(shap_matrix){
 }
 
 
-
+# plots Shapley valeus as a function of observed input values to reveal the functional form learned by the model
 shap_scatter_single <- function(data_input, v, 
                                 ylim = NULL,
                                 polynomial_degree = 0,
@@ -315,31 +314,5 @@ shap_scatter_single <- function(data_input, v,
     lines(data_input[[v]][oo], poly_fit$fitted.values[oo], col = col_function)
   }
   
-}
-
-shap_scatter_methods <- function(data_input, v, methods, ylim = c(-1, 1.2), show_series = c(), polynomial_degree = 0){
-  xlim <- c(min(data_input[[v]]), max(data_input[[v]]))
-  plot.new()
-  plot.window(xlim = xlim, ylim = ylim)
-  axis(1); axis(2)
-  title(ylab = "Shapley value", xlab = "Observed predictor values", line = 2)
-  title(main = feature_names[v], line = 0)
-  for (method in methods){
-    ix <- data_input$method == method
-    print(sum(ix))
-    if(method %in% show_series)
-      points(data_input[[v]][ix], data_input[[paste0("shap_", v)]][ix], 
-             pch = pch_algos[method],
-             col = makeTransparent(cols_algos[method], alpha = .4),
-             cex = .7
-      )  
-    
-    if(polynomial_degree > 0){
-      poly_fit <- lm(data_input[[paste0("shap_", v)]][ix] ~ poly(data_input[[v]][ix], polynomial_degree))
-      oo <- order(data_input[[v]][ix])
-      lines(data_input[[v]][ix][oo], poly_fit$fitted.values[oo], col = cols_algos[method])
-    }
-  }
-  legend("bottomleft", legend = clean_names[methods], col = cols_algos[methods], bty = "n", y.intersp = .8, lty = 1)
 }
 

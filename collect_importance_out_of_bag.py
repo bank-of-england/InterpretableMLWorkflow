@@ -1,3 +1,8 @@
+"""
+This script collects the variable importance results of the out-of-bag experiments in a csv file.
+"""
+
+
 from helpers.import_packages import *
 import helpers.config as config  
 from helpers.utils import *

@@ -1,19 +1,20 @@
-from __main__ import *
+"""
+This script contains functions and parameters used to train and test the prediction models, e.g. it specifies the hyperparameter grids of the machine learning models
+"""
 
-# CV VALUES for grids search
-nn0, nnf   = 5, 5  # parameters for NN, specifies number of neurons per layer
+
+from __main__ import *
+nn0, nnf   = 5, 5  # parameters for th neural network (NN), specifies number of neurons per layer
 
 
 """
 look-up dictionary for the machine learning model calls
-requires package imports according to the import+[ackages script]
+requires package imports according to the import_packages script]
 """
 sk_model_dict = {
                 'SVM': "skl_svm.SVR",
                 'NN' : "skl_nn.MLPRegressor", 
                 'Forest': "skl_ens.RandomForestRegressor",        
-                'Forest_fast': "skl_ens.RandomForestRegressor",   
-                'Forest_rich': "skl_ens.RandomForestRegressor",                                       
                 "GP": "GaussianProcessRegressor",
                 'Enet': "skl_lin.ElasticNetCV",
                 "LightGBM":  "lightgbm.LGBMRegressor",
@@ -143,7 +144,7 @@ def make_model_str(method, do_boot, exp, hyper_input = {}):
 :param do_boot: whether ML model model is bootstrapped
 :param exp: dictionary containing experimental configuration
 :hyper_input: dict of hyperparameters that have previously been determined by a cross-validated search
-:return: returnss initialised model object
+:return: initialised model object
 """
 def model_selection(method, do_boot, exp, hyper_input={}):
     return(eval(make_model_str(method, do_boot, exp, hyper_input = hyper_input)))
@@ -162,8 +163,6 @@ conducts hyperparamter search for machine learning models
 """
 def cv_hyper(df, exp, features, pca = False):
     
-    if exp["bootstrap_hyper"]:
-        df = df.sample(frac=.8, replace=False).sort_index()
     if exp["error_metric"] == "absolute_error":
         scoring = "neg_mean_absolute_error"
     if exp["error_metric"] == "squared_error":
@@ -360,7 +359,7 @@ def model_tester(df_train, df_test, features, exp, hyper=None, save_models = Tru
                 and variable importance. "forecast" means proper out-of-sample forecasting. 
                 "out-of-bag" means training the models on a bootstrapped sample and testing them
                 on the out-of-bag sample
-:param out_of_bag_dates: list of the dates up to which we train the boostrapped models and evaluate their out-of-bag predictions
+:param out_of_bag_dates: list of the dates up to which we train the bootstrapped models and evaluate their out-of-bag predictions
 
 
 """
@@ -451,7 +450,7 @@ def run_experiments(data_in,
         # index on row of the data set where we start the test set
         time_first_test = int(np.where(df_use.index.values == np.datetime64(config.periods["all"][0]))[0]) 
         time_first_test = time_first_test - 12 * 6 # start a few years early to make sure we actual have a valid test set according 
-                                                   # to the period data after controlling the lag between trianing and test et
+                                                   # to the period data after controlling the lag between training and test set
         
         # determine the end time steps of the training sets that we will iterate through when recursively training the models
         # the step size parameter determines how often the models are updated
@@ -464,7 +463,7 @@ def run_experiments(data_in,
             if "out-of-bag" in test_time:
                 if not np.all(np.isin(np.array(out_of_bag_dates, dtype=np.datetime64), end_training_times)): # if boot_dates are not covered by the training sequence
                     raise ValueError("The selected bootstrapping dates (parameter out_of_bag_dates) are not in the sequence of test sets considered."\
-                        "Change out_of_bag_dates accordingly or do not use forecasting and boostrap simultaneously as prediction tasks."
+                        "Change out_of_bag_dates accordingly or do not use forecasting and bootstrap simultaneously as prediction tasks."
                     )
 
         model_dict = {}
@@ -505,7 +504,7 @@ def run_experiments(data_in,
             # do hyperparameter search
             do_hyper = t == 0 # at the first time step, we need to find hyperparameters
             do_hyper = do_hyper or (t % exp["cv_mode"] == 0) # and we do it at every "cv_mode" time step. E.g. if model is trained once a year (step_size = 12)
-                    # cv_mode =3, means that the hpyerparameters are updated every 3 years.
+                    # cv_mode =3, means that the hyperparameters are updated every 3 years.
             do_hyper = do_hyper or (not "forecast" in test_time)  # when we do not do forecasting but only out-of-bag performance analysis, 
                 # we also need to tune the hyperparameters
             do_hyper = do_hyper and (exp["method"] in hyper_grid.keys()) # we only do the hyperparameter search for models that have hyperparameters
@@ -569,7 +568,7 @@ def run_experiments(data_in,
 
 """
 This function collects the predictions of a single recursive forecasting experiment. Each of these experiment
- produces a sequence of models each making a prediction for the next few time steps before a more recently tained model
+ produces a sequence of models each making a prediction for the next few time steps before a more recently trained model
  is used. This function collects all these predictions of the different models into a a single series of predictions.
 :param input_all: nested dictionary containing all the results of the forecasting experiment 
 :param boot_use: int specifying how many bootstrap iterations (if model has been bootstrapped) will be used for prediction.
@@ -638,7 +637,7 @@ It creates an output table for each period that is considered
     The hash of the experiment is the key of the dict
 :param table: pd.DataFrame containing the experimental parameters of all experiments
 :param periods: dict containing the period(s) for which the output table is prepared
-:return: dict of pd.DataFrames containing the predictions and true values + experimental paramters for selected period
+:return: dict of pd.DataFrames containing the predictions and true values + experimental parameters for selected period
 """
 def prediction_table(predictions, table, periods):
         table_descriptors = table.copy()

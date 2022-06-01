@@ -1,15 +1,6 @@
-# -*- coding: utf-8 -*-
 """
-Auxiliary package import: Case study UK CPI inflation projections
------------------------------------------------------------------
-from Bank of England SWP 674: Machine learning at central banks (September 2017)
-- authors:         Marcus Buckmann & Andreas Joseph
-- disclaimer:      licence.txt and SWP 674 disclaimer apply
-- documentation:   see README.txt for structure and comments for details
+This file imports all required packages
 """
-
-# basics
-
 import os
 from contextlib import contextmanager
 import platform
@@ -29,11 +20,6 @@ import random
 import yaml
 import tscv
 from monthdelta import monthdelta
-
-
-
-
-
 
 
 # machine learning (from scikit-learn)

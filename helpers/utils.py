@@ -1,3 +1,7 @@
+"""
+This script contains general helper functions
+"""
+
 from __main__ import *
 import os
 import pickle
@@ -106,8 +110,9 @@ def model_val_params(exp_dict):
 
 
 """
-Creates a data frame listing all experiments by enurating all combinations of the experimental parameters
+Creates a data frame listing all experiments by computing all combinations of the experimental parameters
 :param setup_file dictionary that contains all the relevant experimental parameters
+:return pd.DataFrame listing all experiments 
 """
 def list_experiments(setup_file):
     experiment_specs = setup_file.copy()
@@ -125,9 +130,9 @@ def list_experiments(setup_file):
 
 """
 Some experimental combination are effectively duplicates and can be removed.
-This fucntion does that. For example, using different cross-validation proceudres for
-hyperpater tuning is irrelevant for models without hyperparamters
-:param experiments pd.DataFrame contianing all the experimentss
+This function does that. For example, using different cross-validation procedures for
+hyperparameter tuning is irrelevant for models without hyperparameters
+:param experiments pd.DataFrame containing all the experiments
 :return: pd.DAtaFrame of experiments removing the duplicates
 """
 def remove_duplicates(experiments):
@@ -141,8 +146,8 @@ def remove_duplicates(experiments):
 """
 compute prediction errors
 :param y_true: np.array (vector) of observed response
-:param y_pred: np.array (vceotr) of predicted response
-:param normalise: booleean whether the error should be normalised by 
+:param y_pred: np.array (vector) of predicted response
+:param normalise: boolean whether the error should be normalised by 
     a simple baseline (mean prediction)
 :return: different error metrics
 """
@@ -229,11 +234,8 @@ Transforms the variables of the whole data set. By calling the variable_transfor
     Only those variables in the dict will be transformed    
 :param target: str name of the target variable. In contrast to other variables, it will not be lagged
 :param lag_indicators: int by how much the predictors are lagged
-:param drop_na: boolean whether observations with missing values sohuld be dropped
+:param drop_na: boolean whether observations with missing values should be dropped
 :return: pd.DataFrame containing the transformed data
-
-
-
 """
 def transform_data(data_input, index, start_ix, end_ix, transformations, target, lag_indicators = 0, drop_na = True):
     # data is a pandas data frame    
@@ -281,8 +283,8 @@ Samples with replacement from an input data set
 :param do_boot: boolean. If False, no sampling is applied and the input data set is returned
 :param seed: int random seed
 :return: a tuple of four objects is returned: 
-        (1) the bootrapped data set, 
-        (2) the out-of-bag data frame containing those observations not in the boostrapped set 
+        (1) the bootstrapped data set, 
+        (2) the out-of-bag data frame containing those observations not in the bootstrapped set 
         (3) a boolean vector indicating which of the rows of the input data are in the out-of-bag set
         (4) a vector of the indices of the observations in the bootstrapped data set
 """

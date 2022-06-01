@@ -1,8 +1,8 @@
 """
-This script collects the performance results of all experiments in a single csv files.
+This script collects the performance results of the forecasting experiments in a single csv files.
 """
-from helpers.import_packages import *     # standard libraries
-import helpers.config as config    # set target variable, model choice and sensitivity analysis options
+from helpers.import_packages import * 
+import helpers.config as config
 from helpers.utils import *
 from helpers.utils_predict import *
 from helpers.utils_importance import *

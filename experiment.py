@@ -1,3 +1,7 @@
+"""
+This scripts runs the experiments. It trains and tests the machine learning models and estimates Shapley values and permutation importance
+"""
+
 from helpers.import_packages import *     # standard libraries
 import helpers.config as config    # set target variable, model choice and sensitivity analysis options
 from helpers.utils import *
@@ -37,11 +41,11 @@ for key in list(transformations.keys()):
         raw_data.rename({key: key_replace}, axis=1, inplace=True)
         transformations[key_replace] = transformations.pop(key)
 
-experiments = list_experiments(experiment_parameters) # this create a dataframe of all experiments that we want to run
+experiments = list_experiments(experiment_parameters) # this creates a dataframe of all experiments that we want to run
 experiments = remove_duplicates(experiments) # this removes experiments that have effectively the same specification because a parameter is varied that is not relevant for the specific set-up
 
 
-# forecasting
+# forecasting experiments
 run_experiments(raw_data, 
                         experiments, 
                         transformations, 
@@ -50,7 +54,7 @@ run_experiments(raw_data,
                         out_of_bag_dates = None,
                         overwrite = False)
                         
-# out-of_bag
+# out-of-bag experiments
 run_experiments(raw_data, 
                         experiments, 
                         transformations, 

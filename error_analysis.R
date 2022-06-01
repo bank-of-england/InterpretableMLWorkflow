@@ -8,7 +8,7 @@ df_pred$date <- as.Date(df_pred$date)
 df_pred <- df_pred %>% filter(date >= periods$all[1] & date <= periods$all[2])
 
 
-# average results across repeated replciations of the same experiment
+# average results across repeated replications of the same experiment
 df_pred_mean <- df_pred %>% group_by(date, method, hyper_type, features, lag,
                                      n_boot, winsorize, window_size) %>% summarise_at(c("pred", "true"), mean) 
 
