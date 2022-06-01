@@ -1,3 +1,6 @@
+"""
+This script conducts Shapely regressions (see Joseph (2019)) on the forecasts of the prediction models
+"""
 from helpers.import_packages import * 
 import helpers.config as config    
 from helpers.utils import *
@@ -28,7 +31,7 @@ shap_values.columns = [re.sub("shap_", "", f) for f in list(shap_values.columns)
 obs_values = obs_values.groupby("date").mean() 
 shap_values = shap_values.groupby("date").mean()
 
-# compute shapley regression
+# compute Shapley regression
 table = shapley_regression(
                         data = obs_values, 
                         decomp = shap_values,
